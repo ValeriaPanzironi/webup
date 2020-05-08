@@ -1,0 +1,51 @@
+<script>
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
+$("#submitButton").click(function(){
+    var errorMessage = "";
+    var campivuoti = "";
+    if ($("#email").val() == ""){
+        campivuoti += "<br>Email";
+    }
+
+    if ($("#password").val() == ""){
+        campivuoti += "<br>Password";
+    }
+
+    if ($("#passwordConfirm").val() == ""){
+        campivuoti += "<br>Conferma Password";
+    }
+
+    if(campivuoti != ""){
+        errorMessage += "<p>I seguenti campi sono vuoti: " + campivuoti + "</p>";
+    }
+
+    if (isEmail($("#email").val()) == false){
+        errorMessage += "<p>La mail inserita non è valida</p>";
+    }
+
+    if ($("#password").val() != $("#passwordConfirm").val()){
+        errorMessage += "<p>Attento, le due password sono differenti!</p>"
+    }
+
+    if (errorMessage != ""){
+        $("#errorMessage").html(errorMessage);
+    } else {
+        $("#successMessage").show();
+        $("#errorMessage").hide();
+    }
+
+  });
+
+$("input").focus(function(){
+    $(this).css("background-color", "yellow");
+});
+$("input").blur(function(){
+    $(this).css("background-color", "red");
+});
+
+</script>
